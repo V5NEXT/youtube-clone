@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BaseUrl = "https://youtube-v31.p.rapidapi.com/"
+const BaseUrl = "https://youtube-v31.p.rapidapi.com"
 
 const options = {
     params: {
