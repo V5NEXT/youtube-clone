@@ -12,7 +12,7 @@ const ChannelDetail = () => {
    const {id} = useParams();
 
    useEffect(()=>{
-    fetchFromApi(`channels?part=snippet&id="${id}`)
+    fetchFromApi(`channels?part=snippet&id=${id}`)
     .then((data)=>setChannelDetail(data?.items[0]));
 
     fetchFromApi(`search?channelId=${id}&part=snippet&order=date`)
@@ -20,8 +20,18 @@ const ChannelDetail = () => {
    }, [id])
 
   return (
-    <div>{id}</div>
-   )
+<Box minHeight="95vh">
+  <Box>
+    <div style={{
+      background: 'background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,72,1) 49%, rgba(0,212,255,1) 100%)',
+      zIndex: 10,
+      height:'300px'
+   }}/>
+
+  </Box>
+
+</Box>  
+ )
 }
 
 export default ChannelDetail
