@@ -8,7 +8,6 @@ const ChannelDetail = () => {
    const [ChannelDetail, setChannelDetail] = useState(null)
    const [videos, setVideos] = useState([])
 
-console.log(videos)
    const {id} = useParams();
    useEffect(()=>{
     fetchFromApi(`channels?part=snippet&id=${id}`)
@@ -26,7 +25,7 @@ console.log(videos)
       zIndex: 10,
       height:'300px'
    }}/>
-
+    <ChannelCard channelDetail={ChannelDetail} marginTop='-110px'/>
   </Box>
 
 </Box>  
