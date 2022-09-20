@@ -3,20 +3,26 @@ import { Link, useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import { Typography, Box, Stack } from '@mui/material';
 import { CheckCircle } from '@mui/icons-material';
-import {Video} from './';
+import {Videos} from './';
 import { fetchFromApi } from '../utils/fetchFromApi';
 
 const VideoDetail = () => {
 
   const {id} = useParams();
-  const [videoDetail, setVideoDetail] = useState(null)
+  const [videoDetail, setVideoDetail] = useState(null);
+  const [relatedVideos, setRelatedVideos] = useState([]);
 
 
 
   useEffect(()=>{
     fetchFromApi(`videos?part=snippet,statistics&id=${id}`)
-    .then((data)=>setVideoDetail(data.items[0]))
+    .then((data)=>setVideoDetail(data.items[0]));
+    fetchFromApi(`search?part=snippet&relatedToVideoId=${id}&type=video`)
+    .then((data)=>setRelatedVideos(data.items));
   }, [id]);
+
+  console.log(relatedVideos)
+
 
   if(!videoDetail?.snippet) return 'Loading...'
   const {snippet : {title, channelId, channelTitle}, statistics:{
@@ -53,10 +59,16 @@ const VideoDetail = () => {
               </Stack>
           </Stack>
           </Box>
+         
 
         </Box>
+     
 
       </Stack>
+          <Box px={2} py={{md:1, xs:5}} justifyContent="center" alignItems="center">
+
+          <Videos videos={relatedVideos}/>
+          </Box>
 
     </Box>
   )
